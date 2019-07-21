@@ -2,22 +2,28 @@
 
 int main()
 {
-	List list;
-	ListInit(&list);
-	ListPushFront(&list, 1);
-	ListPushFront(&list, 2);
-	ListPushFront(&list, 3);
-	ListPushFront(&list, 4);
-	ListPushFront(&list, 5);
-	ListPushFront(&list, 6);
-	ListFind(&list, 6);
-	ListInsertAfter(ListFind(&list, 6), 6);
+	List list1;
+	List list2;
+	ListInit(&list1);
+	ListInit(&list2);
+	ListPushFront(&list1, 7);
+	ListPushFront(&list1, 5);
+	ListPushFront(&list1, 3);
+	ListPushFront(&list1, 1);
+	ListPushFront(&list2, 9);
+	ListPushFront(&list2, 6);
+	ListPushFront(&list2, 4);
+	ListMerge(&list1, &list2);
+
+	//ListDistinct(&list);
+	//ListFind(&list, 6);
+	//ListInsertAfter(ListFind(&list, 6), 6);
 	//ListPopFront(&list);
 	//ListPopBack(&list);
 
-	ListPrint(&list);
+	ListPrint(&list1);
 
-	ListDestory(&list);
+	ListDestory(&list1);
 	system("pause");
 	return 0;
 }

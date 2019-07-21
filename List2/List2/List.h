@@ -31,6 +31,10 @@ void ListInsert(ListNode* pos, LTDataType x);
 
 void ListErase(ListNode* pos);
 void ListRemove(List* plist, LTDataType x);
+
+void ListDistinct(List* plist);
+void  ListMerge(List * plist1,List * plist2);
+
 void ListPrint(List* plist);
 
 
