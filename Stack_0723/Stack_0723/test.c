@@ -3,7 +3,10 @@
 
 int main()
 {
-	Stack ps;
+	Queue qu;
+	My_Queue(&qu);
+
+	/*Stack ps;
 	StackInit(&ps);
 	StackPush(&ps, 1);
 	StackPush(&ps, 2);
@@ -15,7 +18,7 @@ int main()
 	StackPop(&ps);
 	StackPrint(&ps);
 	printf("%d\n", StackTop(&ps));
-	StackDestory(&ps);
+	StackDestory(&ps);*/
 
 	system("pause");
 	return 0;
