@@ -1,5 +1,6 @@
 #include"bintree.h"
 #include"queue.h"
+#include"stack.h"
 
 int main()
 {
@@ -12,6 +13,16 @@ int main()
 	putchar('\n');
 	BinaryTreeLevelOrder(BT);
 	putchar('\n');
+	BinaryTreePrevOrderNonR(BT);
+	putchar('\n');
+	BinaryTreeInOrderNonR(BT);
+	putchar('\n');
+	BinaryTreePostOrderNonR(BT);
+	putchar('\n');
+
+
+
+
 	//Queue qu;
 	//QueueInit(&qu);
 	//QueuePush(&qu, 5);

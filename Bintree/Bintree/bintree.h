@@ -2,6 +2,7 @@
 #define _BINTREE_H_
 
 #include<stdio.h>
+#include<string.h>
 #include<Windows.h>
 #define ENDTAG '#'
 
@@ -26,6 +27,7 @@ int BinaryTreeLeafSize(BTNode* root);
 int BinaryTreeLevelKSize(BTNode* root, int k);
 BTNode* BinaryTreeFind(BTNode* root, BTDataType x);
 
+
 // 遍历//深度优先遍历
 void BinaryTreePrevOrder(BTNode* root);
 void BinaryTreeInOrder(BTNode* root);
@@ -33,6 +35,9 @@ void BinaryTreePostOrder(BTNode* root);
 // 非递归遍历
 // 层序遍历
 void BinaryTreeLevelOrder(BTNode* root);//广度优先遍历
+
+
+
 // 判断二叉树是否是完全二叉树
 int BinaryTreeComplete(BTNode* root);
 void BinaryTreePrevOrderNonR(BTNode* root);
