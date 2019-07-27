@@ -4,7 +4,8 @@
 
 int main()
 {
-	BTNode *BT = BinaryTreeCreate("ABD##E#H##CF##G##");
+	//BTNode *BT = BinaryTreeCreate("ABD##E#H##CF##G##");
+	BTNode *BT = BinaryTreeCreate("ABD##EJ###CF##G##");
 	BinaryTreePrevOrder(BT);
 	putchar('\n');
 	BinaryTreeInOrder(BT);
@@ -19,7 +20,10 @@ int main()
 	putchar('\n');
 	BinaryTreePostOrderNonR(BT);
 	putchar('\n');
+	printf("%d", BinaryTreeComplete(BT));
+	putchar('\n');
 
+	BinaryTreeDestory(BT);
 
 
 

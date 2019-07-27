@@ -125,8 +125,8 @@ void BinaryTreeInOrderNonR(BTNode* root)
 			StackPush(&st, cur);
 		}
 
-		if (StackEmpty(&st))
-		{
+		//if (StackEmpty(&st))
+		//{
 			cur = StackTop(&st);
 			//1，左孩子遍历完毕后，第一个没有左孩子的结点就是中序的第一个输出
 			//2，如果右孩子为空，此时栈里将会是下一个要访问的结点，如果有右孩子，那么此时栈里将会是以那个右孩子
@@ -135,13 +135,13 @@ void BinaryTreeInOrderNonR(BTNode* root)
 			StackPop(&st);//出栈
 			cur = cur->_right;
 			//1，左孩子和根遍历结束后，遍历它的右子树
-		}
+		//}
 	}
 	StackDestory(&st);
 }
 
 //非递归后序遍历
-void BinaryTreePostOrderNonR(BTNode* root)
+void BinaryTreePostOrderNonR(BTNode* root)//左右根
 {
 	BTNode * cur = root;
 
@@ -175,6 +175,92 @@ void BinaryTreePostOrderNonR(BTNode* root)
 	}
 	StackDestory(&st);
 }
+
+//判断一棵树是不是完全二叉树
+int BinaryTreeComplete(BTNode* root)
+{
+	Queue qu;
+	BTNode *tmp;
+	int leafflag = 0;
+	QueueInit(&qu);
+	QueuePush(&qu, root);
+	while (!QueueEmpty(&qu))
+	{
+		tmp = QueueFront(&qu); 
+		printf("%c", tmp->_data);
+		QueuePop(&qu);
+		if (leafflag )//当出现有左孩子没有右孩子时，队列里剩余的值都只能有叶子节点，一旦出现左右孩子直接退出
+		{
+			if (tmp->_left || tmp->_right)
+			{
+				return 0;
+			}
+			continue;
+		}
+		if (tmp->_left&&tmp->_right)
+		{
+			QueuePush(&qu, tmp->_left);
+			QueuePush(&qu, tmp->_right);
+		}
+		else if (tmp->_right&&!tmp->_left)//有右孩子没有左孩子时，一定不是完全二叉树，直接退出
+		{
+			return 0;
+		}
+		else
+		{
+			leafflag = 1;
+			if (tmp->_left)
+			{
+				QueuePush(&qu, tmp->_left);
+			}
+		}
+	}
+	QueueDestory(&qu);
+}
+
+void BinaryTreeDestory(BTNode* root)//前序遍历的摧毁
+{
+	BTNode *left;
+	BTNode *right;
+	if (root)
+	{
+		left = root->_left;
+		right = root->_right;
+		free(root);
+		BinaryTreeDestory(left);
+		BinaryTreeDestory(right);
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
