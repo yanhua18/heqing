@@ -1,86 +1,46 @@
-//1，在一个二维数组中，每一行按照从左到右递增的顺序排列，每一列按照从上到下递增的顺序排列，输入一个整数判断是否存在这个二维数组中，时间复杂度（O（row+col））
 #include<stdio.h>
 #include<windows.h>
-//int search(int *arr[][4], int data, int *m, int *n)
-//{
-//	int i = 0, j = *n-1;
-//	while (i <*m && j >=0 )
-//	{
-//		if (arr[i][j] < data)
-//		{
-//			i++;
-//		}
-//		if (arr[i][j] > data)
-//		{
-//			j--;
-//		}
-//		if (arr[i][j] == data)
-//		{
-//			*m = i;
-//			*n = j;
-//			return;
-//		}
-//	}
-//	*m = -1;
-//	*n = -1;
-//}
-//int main()
-//{
-//	int i = 4, j = 4;
-//	int arr[4][4] = 
-//	  { 1, 2, 8, 9,
-//		2, 4, 9, 12,
-//		4, 7, 10, 13,
-//		6, 8, 11, 15 };
-//	int data = 7;
-//	int m = 4, n = 4;
-//	search(arr, data, &m, &n);
-//	printf("该数字在数组中的下标为：<%d,%d>\n", m, n);
-//	system("pause");
-//	return 0;
-//}
-//2，将字符串中的空格转换成%20
 #if 0
-char * change(char *arr1,char *arr2)
+//1，在一个二维数组中，每一行按照从左到右递增的顺序排列，每一列按照从上到下递增的顺序排列，输入一个整数判断是否存在这个二维数组中，时间复杂度（O（row+col））
+int search(int *arr[][4], int data, int *m, int *n)
 {
-	char arr[20];
-	int i = 0;
-	char *_arr2 = arr2;
-	while (i < 20)
+	int i = 0, j = *n-1;
+	while (i <*m && j >=0 )
 	{
-		while (*arr1 != '\0')
+		if (arr[i][j] < data)
 		{
-			if (*arr1 == ' ')
-			{
-				for (; *_arr2 != '\0'; _arr2++)
-				{
-					arr[i] = *_arr2;
-					i++;
-				}
-				_arr2 = arr2;
-				arr1++;
-			}
-			else
-			{
-				arr[i] = *arr1;
-				arr1++;
-				i++;
-			}
+			i++;
 		}
-		arr[i] = '\0';
-		printf("%s\n", arr);
-		return;
+		if (arr[i][j] > data)
+		{
+			j--;
+		}
+		if (arr[i][j] == data)
+		{
+			*m = i;
+			*n = j;
+			return;
+		}
 	}
+	*m = -1;
+	*n = -1;
 }
 int main()
 {
-	char arr1[] = "abc defgx yz";
-	char arr2[] = "%20";
-	change(arr1, arr2);
+	int i = 4, j = 4;
+	int arr[4][4] = 
+	  { 1, 2, 8, 9,
+		2, 4, 9, 12,
+		4, 7, 10, 13,
+		6, 8, 11, 15 };
+	int data = 7;
+	int m = 4, n = 4;
+	search(arr, data, &m, &n);
+	printf("该数字在数组中的下标为：<%d,%d>\n", m, n);
 	system("pause");
 	return 0;
 }
-#endif
+
 //2，将字符串中的空格转换成%20
 void StringChange(char *arr)
 {
@@ -115,7 +75,6 @@ void StringChange(char *arr)
 		newlen--;
 	}
 }
-
 int main()
 {
 	char arr[20] = "abc defgx yz";
@@ -124,3 +83,42 @@ int main()
 	system("pause");
 	return 0;
 }
+#endif
+
+//求第n个斐波拉契数
+int _Fibonacci(int n)
+{
+	int arr[100];
+	int i;
+	arr[0] = 1;
+	arr[1] = 1;
+	for (i = 2; i < n; i++)
+	{
+		arr[i] = arr[i - 1] + arr[i - 2];
+	}
+	return arr[i-1];
+}
+int Fibonacci(int n)
+{
+	int a = 1;
+	int b = 1;
+	int c;
+	while (n > 2)
+	{
+		c = a + b;
+		a = b;
+		b = c;
+		n--;
+	}
+	return c;
+}
+int main()
+{
+	int x = Fibonacci(7);
+	printf("%d\n", x);
+	system("pause");
+	return 0;
+}
+
+
+
