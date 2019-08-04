@@ -1,5 +1,7 @@
 #include<stdio.h>
 #include<windows.h>
+#include<string.h>
+#pragma warning (disable:4996)
 #if 0
 //1，在一个二维数组中，每一行按照从左到右递增的顺序排列，每一列按照从上到下递增的顺序排列，输入一个整数判断是否存在这个二维数组中，时间复杂度（O（row+col））
 int search(int *arr[][4], int data, int *m, int *n)
@@ -83,9 +85,8 @@ int main()
 	system("pause");
 	return 0;
 }
-#endif
 
-//求第n个斐波拉契数
+//3，求第n个斐波拉契数
 int _Fibonacci(int n)
 {
 	int arr[100];
@@ -119,6 +120,37 @@ int main()
 	system("pause");
 	return 0;
 }
-
-
+//求一个无符号整形变量x在内存中二进制1的个数
+int _Get_number(int n)
+{
+	int i;
+	int num = 0;
+	for (i = 31; i >= 0; i--)
+	{
+		if ((n >> i) & 1)
+		{
+			num++;
+		}
+	}
+	return num;
+}
+int Get_number(int n)
+{
+	int count = 0;
+	while (n)
+	{
+		n = n&(n - 1);
+		count++;
+	}
+	return count;
+}
+int main()
+{
+	unsigned int a = 255;
+	int num = Get_number(a);
+	printf("%d", num);
+	system("pause");
+	return 0;
+}
+#endif
 
