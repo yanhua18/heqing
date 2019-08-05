@@ -18,5 +18,13 @@
     <ClCompile Include="homework.c">
       <Filter>源文件</Filter>
     </ClCompile>
+    <ClCompile Include="SList.c">
+      <Filter>源文件</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="SList.h">
+      <Filter>头文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

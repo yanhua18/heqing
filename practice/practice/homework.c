@@ -1,3 +1,4 @@
+#include"SList.h"
 #include<stdio.h>
 #include<windows.h>
 #include<string.h>
@@ -120,7 +121,7 @@ int main()
 	system("pause");
 	return 0;
 }
-//求一个无符号整形变量x在内存中二进制1的个数
+//4,求一个无符号整形变量x在内存中二进制1的个数
 int _Get_number(int n)
 {
 	int i;
@@ -154,3 +155,44 @@ int main()
 }
 #endif
 
+//5.有一张单链表，编写函数求倒数第k个结点
+int Get_Locate(SListNode** pphead, int k)
+{
+	SListNode *p, *q;
+	p = *pphead;
+	q = *pphead;
+	int count = 0;
+	while (q != NULL)
+	{
+		count++;
+		if (count > k)
+		{
+			p = p->next;
+		}
+		q = q->next;
+	}
+	if (k > count)
+	{
+		return -1;
+	}
+	return p->data;
+}
+int main()
+{
+	SListNode *list;
+	SListInit(&list);
+	SListPushFront(&list, 1);
+	SListPushFront(&list, 8);
+	SListPushFront(&list, 3);
+	SListPushFront(&list, 4);
+	SListPushFront(&list, 4);
+	SListPushFront(&list, 6);
+	SListPushFront(&list, 5);
+	SListPushFront(&list, 8);
+	SListPrint(list);
+	printf("\n");
+	int x = Get_Locate(&list, 2);
+	printf("%d\n", x);
+	system("pause");
+	return 0;
+}
