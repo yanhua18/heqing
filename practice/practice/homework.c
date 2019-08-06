@@ -153,7 +153,6 @@ int main()
 	system("pause");
 	return 0;
 }
-#endif
 
 //5.有一张单链表，编写函数求倒数第k个结点
 int Get_Locate(SListNode** pphead, int k)
@@ -196,3 +195,53 @@ int main()
 	system("pause");
 	return 0;
 }
+//实现单链表的逆置
+void SListReverse(SListNode** pphead)
+{
+	SListNode *oldh = *pphead;//定义一个oldh指针指向头，始终指向原有的头结点
+	SListNode *head = *pphead;//定义一个head指针指向头，指向不断更新的头结点
+	SListNode *tmp = head->next;//tmp始终指向oldh的下一个    
+	while (tmp)
+	{
+		oldh->next = tmp->next;//断开tmp，旧头指向tmp的下一个
+		tmp->next = head;//tmp每次指向新的头
+		head = tmp;//将head挪到新的头
+		tmp = oldh->next;//将tmp挪到旧头oldh的下一个
+	}
+	*pphead = head;//逆转结束后，将新的头赋给phead
+}
+void _SListReverse(SListNode** pphead)
+{
+	SListNode *pre = *pphead;
+	SListNode *cur = pre->next;
+	SListNode *next = cur;
+	pre->next = NULL;//让头变成尾
+	while (next)
+	{
+		next = next->next;//next右移一位
+		cur->next = pre;//将原本指向下一位的反转指向上一位
+		pre = cur;//将cur给pre
+		cur = next;//将next给cur（cur指向next）
+	}
+	*pphead = pre;
+}
+int main()
+{
+	SListNode *list;
+	SListInit(&list);
+	SListPushFront(&list, 1);
+	SListPushFront(&list, 8);
+	SListPushFront(&list, 3);
+	SListPushFront(&list, 4);
+	SListPushFront(&list, 4);
+	SListPushFront(&list, 6);
+	SListPushFront(&list, 5);
+	SListPushFront(&list, 8);
+	SListPrint(list);
+	printf("\n");
+	SListReverse(&list);
+	SListPrint(list);
+	system("pause");
+	return 0;
+}
+#endif
