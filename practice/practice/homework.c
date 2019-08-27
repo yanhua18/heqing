@@ -3,6 +3,7 @@
 #include<windows.h>
 #include<string.h>
 #pragma warning (disable:4996)
+
 #if 0
 //1，在一个二维数组中，每一行按照从左到右递增的顺序排列，每一列按照从上到下递增的顺序排列，输入一个整数判断是否存在这个二维数组中，时间复杂度（O（row+col））
 int search(int *arr[][4], int data, int *m, int *n)
@@ -241,6 +242,118 @@ int main()
 	printf("\n");
 	SListReverse(&list);
 	SListPrint(list);
+	system("pause");
+	return 0;
+}
+
+
+//12,一个整形数组中出了两个数字之外，其他数字都出现了两个，找出只出现了一次的数字
+void Find_Differ(int *arr,int len)
+{
+	int i,j;
+	int sum = 0;
+	int sum1 = 0;
+	int sum2 = 0;
+	for (i = 0; i < len; i++)
+	{
+		sum ^= arr[i];
+	}
+	for (i = 0; i < 32; i++)
+	{
+		if ((sum >> i) & 1)
+		{
+			break;
+		}
+	}
+	for (j = 0; j < len; j++)
+	{
+		if ((arr[j] >> i) & 1)
+		{
+			sum1 ^= arr[j];
+		}
+		else
+		{
+			sum2 ^= arr[j];
+		}
+	}
+	printf("%d , %d", sum1, sum2);
+}
+int main()
+{	
+	int arr[] = { 1, 3, 5, 7, 1, 3, 5, 9 };
+	int len = sizeof(arr) / sizeof(arr[0]);
+	Find_Differ(arr,len);
+	system("pause");
+	return 0;
+}
+
+//13，输入两个字符串，从第一串中删除第二串中所有的字符
+char *Find_repeat(char *arr1, char *arr2)
+{
+	char *p1 = arr1;
+	char *p2 = arr2;
+	char *p = arr1;
+	while (*p2 != '\0')
+	{
+		p1 = arr1;
+		while (*p1 != '\0')
+		{
+			if (*p2 == *p1)
+			{
+				p = p1;
+				while (*p != '\0')
+				{
+					*p = *(p+1);
+					p++;
+				}
+			}
+			else
+			{
+				p1++;
+			}
+		}
+		p2++;
+	}
+	return arr1;
+}
+int main()
+{
+	char arr1[] = "They are students.";
+	char arr2[] = "aeiou";
+	Find_repeat(arr1, arr2);
+	printf("%s", arr1);
+	system("pause");
+	return 0;
+}
+
+//14,判断一个数字是否为回文数（主要就是将该数字倒过来，若与原来的数字相等，则该数字就是回文数）
+int Paindrome_Judge(int num)
+{
+	int newnum = 0;
+	int n = num;
+	while (num > 0)
+	{
+		newnum = newnum * 10 + num % 10;
+		num /= 10;
+	}
+	if (n == newnum)
+	{
+		return 1;
+	}
+	return 0;
+}
+int main()
+{
+	int num = 12321;
+	int x = Paindrome_Judge(num);
+	if (x)
+	{
+		printf("数字%d是回文数",num);
+	}
+	else
+	{
+		printf("数字%d不是回文数",num);
+	}
 	system("pause");
 	return 0;
 }
