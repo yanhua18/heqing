@@ -1,8 +1,9 @@
-﻿生成启动时间为 2019/8/27 21:19:10。
+﻿生成启动时间为 2019/8/28 12:14:31。
      1>项目“E:\程序文件\github上传文件\heqing\practice\practice\practice.vcxproj”在节点 2 上(Build 个目标)。
      1>ClCompile:
          E:\VS2013\VC\bin\CL.exe /c /I"E:\App\Visual Leak Detector\include" /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt homework.c
          homework.c
+     1>cl : 命令行 warning D9028: 最小重新生成失败，正在转换为标准生成
        Link:
          E:\VS2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\程序文件\github上传文件\heqing\practice\Debug\practice.exe" /INCREMENTAL /NOLOGO /LIBPATH:"E:\App\Visual Leak Detector\lib\Win32" kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\程序文件\github上传文件\heqing\practice\Debug\practice.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\程序文件\github上传文件\heqing\practice\Debug\practice.lib" /MACHINE:X86 Debug\homework.obj
          Debug\SList.obj
@@ -11,4 +12,4 @@
 
 生成成功。
 
-已用时间 00:00:01.29
+已用时间 00:00:01.34

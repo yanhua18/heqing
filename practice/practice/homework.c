@@ -246,6 +246,100 @@ int main()
 	return 0;
 }
 
+//10,在字符串中找出第一个只出现一次的字符，要求时间复杂度为O（n）
+//时间复杂度为O(n^2)
+char Find_One(int *arr)
+{
+	char *fast = arr;
+	char *last = arr;
+	while (*fast != '\0')
+	{
+		while (*last != '\0')
+		{
+			if (*fast == *last)
+			{
+				fast++;
+			}
+			else
+			{
+				last++;
+			}
+			return *fast;
+		}
+	}
+	return 0;
+}
+//时间复杂度为O(n)
+char firstNotRepeate(char* str)
+{
+	const int size = 256;//表示
+	int hashTable[256];
+	int i;
+	if (str == NULL) {
+		return '\0';
+	}
+	for (i = 0; i < size; i++) {
+		hashTable[i] = 0;
+	}
+	char *pHashKey = str;
+	while (*(pHashKey) != '\0')
+	{
+		hashTable[*(pHashKey++)]++;
+	}
+	pHashKey = str;
+	while (*(pHashKey) != '\0')
+	{
+		if (hashTable[*(pHashKey)] == 1)
+		{
+			return *(pHashKey);
+		}
+		pHashKey++;
+	}
+	return '\0';
+}
+int main()
+{
+	char arr[] = "abaccdeff";
+	char x = firstNotRepeate(arr);
+	printf("%c", x);
+	system("pause");
+	return 0;
+}
+
+//11,在字符串中找出第一次重复的字符，要求时间复杂度为O（n）
+char first_Repeate(char *str)
+{
+	char arr[256] = { 0 };
+	int i;
+	if (str == NULL)
+	{
+		return '\0';
+	}
+	char *ptr = str;
+	while (*ptr != '\0')
+	{
+		arr[*ptr]++;
+		ptr++;
+	}
+	ptr = str;
+	while (*ptr != '\0')
+	{
+		if (arr[*ptr] == 2)
+		{
+			return *ptr;
+		}
+		ptr++;
+	}
+	return '\0';
+}
+int main()
+{
+	char arr[] = "qywyer23tdd";
+	char x = first_Repeate(arr);
+	printf("%c", x);
+	system("pause");
+	return 0;
+}
 
 //12,一个整形数组中出了两个数字之外，其他数字都出现了两个，找出只出现了一次的数字
 void Find_Differ(int *arr,int len)
@@ -357,4 +451,141 @@ int main()
 	system("pause");
 	return 0;
 }
+//19，对字符串进行压缩
+void Compress(char *str)
+{
+	int count = 1;
+	int i = 0;
+	assert(str != NULL);
+	while (str[i] != '\0')
+	{
+		if (str[i] == str[i + 1])
+		{
+			count++;
+		}
+		else
+		{
+			if (count != 1)
+				printf("%d", count);
+			printf("%c", str[i]);
+			count = 1;
+		}
+		i++;
+	}
+	printf("\n");
+}
+
+char *str_Compress(char *str)
+{
+	int count = 0;
+	char *str1 = str;
+	char *str2 = str;
+	while (*str1 != '\0')
+	{
+		count = 1;
+		while (*str1 == *(str1+1))
+		{
+			count++;
+			str1++;
+		}
+		*str2 = count+48;
+		*(++str2) = *str1;
+		str2++;
+		str1++;
+	}
+	*str2 = '\0';
+	return str;
+}
+int main()
+{
+	char arr[] = "xxxyyyyz";
+	//char *str = str_Compress(arr);
+	//printf("%s\n", str);
+	Compress("xxyyyz");
+	Compress("xyyyz");
+	Compress("xxxxx");
+	Compress("aabbccdaa");
+	system("pause");
+	return 0;
+}
 #endif
+
+	char *Delete(char *str)
+{
+	char *str1 = str;
+	char *str2 = str;
+	while (*str1 != '\0')
+	{
+		if (*str1 == '*'&&*(str1 + 1)=='*'||*(str1+1)=='\0')
+		{
+			str1++;
+		}
+		
+		else
+		{
+			str1++;
+		}
+		while (*str1 != '*' && *str1 != 0 && str2 != 0)
+		{
+			*str2 = *str1;
+			str2++;
+			str1++;
+		}
+ 	}
+	*str2 = '\0';
+	return str;
+}
+
+	void Deblank(char *str)
+	{
+		int flag = 0; //代表没开始处理空格
+		int p = 0;
+		int i = 0;
+		while (str[i] != '\0')
+		{
+			//遇到空格 还没开始处理
+			if (!flag &&str[i] == ' ')// 遇到空格 让i往后走到不是空格的地方
+			{
+				i++;
+			}
+			//遇到不是空格 还没开始处理
+			else if (!flag &&str[i] != ' ')//不是空格的字符向前赋值
+			{
+				flag = 1; //开始处理空格
+				str[p++] = str[i++];
+			}
+			//遇到空格 开始处理了
+			else if (flag &&str[i] == ' ')
+			{
+				flag = 0; //不处理
+				str[p++] = str[i++];
+			}
+			else
+			{
+				str[p++] = str[i++];
+				flag = 1;
+			}
+		}
+		if (str[p - 1] == ' ') //结尾处多余空格
+			str[p - 1] = '\0';
+		else
+			str[p] = '\0';
+	}
+	int main()
+	{
+		char str[] = " as adad q ";
+		Deblank(str);
+		printf("%s", str);
+		return 0;
+	}
+
+
+
+int main()
+{
+	char arr[] = "*****as****adadq*****";
+	char *str = Delete(arr);
+	printf("%s\n", str);
+	system("pause");
+	return 0;
+}
