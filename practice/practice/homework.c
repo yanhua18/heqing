@@ -442,7 +442,7 @@ int main()
 	int x = Paindrome_Judge(num);
 	if (x)
 	{
-		printf("数字%d是回文数",num);
+		printf("数字%d是回文",num);
 	}
 	else
 	{
@@ -451,6 +451,77 @@ int main()
 	system("pause");
 	return 0;
 }
+
+//16,实现pow(x,y)
+/*
+函数pow(x,y)实现运算x^y，即x的y次方，这里x和y都为整数。
+算法的基本思想是，减少乘法次数，重复利用结算结果，例如：
+x^4，如果逐个相乘的话，需要四次乘法。
+如果我们这样分解(x^2)*(x^2)就只需要2两次乘法，
+因为x^2的结果我们可以重复利用。所以我们最好做对称的分解指数y，
+然后求x^(y/2)的平方。
+具体算法如下：
+1 如果y为偶数，直接计算mypow(x, y/2)*mypow(x, y/2)；
+2 如果y为奇数，则y-1为偶数，回到了第一种情况。
+*/
+int Mypow(int x, int y)
+{
+	int result = 0;
+	int tmp = 0;
+	if (y == 1)
+	{
+		return x;
+	}
+	tmp = Mypow(x, y / 2);
+	if (y & 1 != 0) //奇数
+	{
+		result = x * tmp * tmp;
+	}	else
+	{
+		result = tmp * tmp;
+	}
+	return result;
+}
+int main()
+{
+	int x = 2;
+	int y = 3;
+	int num = Mypow(x, y);
+	printf("%d\n", num);
+	system("pause");
+	return 0;
+}
+
+//18，判断一个数字是不是2的k次方
+int IsPrime(int n)
+{
+	if (n < 1)
+	{
+		return 0;
+	}
+	int m = n&(n - 1);
+	if (m == 0)
+	{
+		return 1;
+	}
+	return 0;
+}
+int main()
+{
+	int n = 16;
+	int x = IsPrime(n);
+	if (x)
+	{
+		printf("该数字是2的倍数");
+	}
+	else
+	{
+		printf("该数字不是2的倍数");
+	}
+	system("pause");
+	return 0;
+}
+
 //19，对字符串进行压缩
 void Compress(char *str)
 {
@@ -508,25 +579,32 @@ int main()
 	system("pause");
 	return 0;
 }
-#endif
 
-	char *Delete(char *str)
+//20,删除字符串首尾的空格，中间的连续空格只能保留一个，员字符串顺序不变
+char *Delete(char *str)
 {
 	char *str1 = str;
 	char *str2 = str;
+	int flag = 0;
 	while (*str1 != '\0')
 	{
-		if (*str1 == '*'&&*(str1 + 1)=='*'||*(str1+1)=='\0')
+		if (!flag && *str1 == '*'&&*(str1 + 1)=='*'||*(str1+1)!='\0')
 		{
 			str1++;
 		}
-		
 		else
 		{
 			str1++;
 		}
+		if (flag && *str1 == '*'&&*(str1 + 1) != '*' && *(str1 + 1) != '\0')
+		{
+			*str2 = '*';
+			str2++;
+			flag = 0;
+		}
 		while (*str1 != '*' && *str1 != 0 && str2 != 0)
 		{
+			flag = 1;
 			*str2 = *str1;
 			str2++;
 			str1++;
@@ -535,57 +613,52 @@ int main()
 	*str2 = '\0';
 	return str;
 }
-
-	void Deblank(char *str)
+char *Deblank(char *str)
+{
+	int flag = 0; //代表没开始处理空格
+	int p = 0;
+	int i = 0;
+	while (str[i] != '\0')
 	{
-		int flag = 0; //代表没开始处理空格
-		int p = 0;
-		int i = 0;
-		while (str[i] != '\0')
+		//遇到空格 还没开始处理
+		if (!flag &&str[i] == '*')// 遇到空格 让i往后走到不是空格的地方
 		{
-			//遇到空格 还没开始处理
-			if (!flag &&str[i] == ' ')// 遇到空格 让i往后走到不是空格的地方
-			{
-				i++;
-			}
-			//遇到不是空格 还没开始处理
-			else if (!flag &&str[i] != ' ')//不是空格的字符向前赋值
-			{
-				flag = 1; //开始处理空格
-				str[p++] = str[i++];
-			}
-			//遇到空格 开始处理了
-			else if (flag &&str[i] == ' ')
-			{
-				flag = 0; //不处理
-				str[p++] = str[i++];
-			}
-			else
-			{
-				str[p++] = str[i++];
-				flag = 1;
-			}
+			i++;
 		}
-		if (str[p - 1] == ' ') //结尾处多余空格
-			str[p - 1] = '\0';
+		//遇到不是空格 还没开始处理
+		else if (!flag &&str[i] != '*')//不是空格的字符向前赋值
+		{
+			flag = 1; //开始处理空格
+			str[p++] = str[i++];
+		}
+		//遇到空格 开始处理了
+		else if (flag &&str[i] == '*')
+		{
+			flag = 0; //不处理
+			str[p++] = str[i++];
+		}
 		else
-			str[p] = '\0';
+		{
+			str[p++] = str[i++];
+			flag = 1;
+		}
 	}
-	int main()
-	{
-		char str[] = " as adad q ";
-		Deblank(str);
-		printf("%s", str);
-		return 0;
-	}
-
-
-
+	if (str[p - 1] == '*') //结尾处多余空格
+		str[p - 1] = '\0';
+	else
+		str[p] = '\0';
+	return str;
+}
 int main()
 {
-	char arr[] = "*****as****adadq*****";
+	char arr[] = "*****as****ada***dq*****";
+	/*char *str = Deblank(arr);
+	printf("%s\n", str);*/
 	char *str = Delete(arr);
 	printf("%s\n", str);
 	system("pause");
 	return 0;
 }
+
+#endif
+
