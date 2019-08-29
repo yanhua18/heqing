@@ -476,7 +476,8 @@ int Mypow(int x, int y)
 	if (y & 1 != 0) //奇数
 	{
 		result = x * tmp * tmp;
-	}	else
+	}
+	else
 	{
 		result = tmp * tmp;
 	}
@@ -488,6 +489,45 @@ int main()
 	int y = 3;
 	int num = Mypow(x, y);
 	printf("%d\n", num);
+	system("pause");
+	return 0;
+}
+
+//17,求一个有序数组中两个元素的值相加等于k，返回这两个元素的下标，要求时间复杂度为o(n),空间复杂度为o(1)
+void Tow_Add(int *arr, int len, int k, int *a, int *b)
+{
+	int low = 0;
+	int high = len - 1;
+	int sum = 0;
+	while (low <= high)
+	{
+		sum = arr[low] + arr[high];
+		if (sum < k)
+		{
+			low++;
+		}
+		else if (sum > k)
+		{
+			high--;
+		}
+		else
+		{
+			*a = low;
+			*b = high;
+			break;
+		}
+	}
+
+}
+int main()
+{
+	int arr[] = { 1, 2, 3, 4, 5, 6, 7, 8, 9, };
+	int len = sizeof(arr) / sizeof(arr[0]);
+	int k = 13;
+	int i = 0;
+	int j = 0;
+	Tow_Add(arr,len, k,&i,&j);
+	printf(" 两个数的下标为： %d , %d ", i, j);
 	system("pause");
 	return 0;
 }
@@ -660,5 +700,28 @@ int main()
 	return 0;
 }
 
+
+
+//8，求一个数组中元素出现次数超过一半的数字
+int arrayLenHalfNum(int *arr,int len)
+{
+	int mid = len / 2;
+
+}
+int main()
+{
+	int arr[] = { 1, 2, 3, 2, 2, 2, 5, 4, 2 };
+	int len = sizeof(arr) / sizeof(arr[0]);
+	int x = arrayLenHalfNum(arr,len);
+	printf("%d\n", x);
+	system("pause");
+	return 0;
+}
 #endif
+
+
+
+
+
+
 
