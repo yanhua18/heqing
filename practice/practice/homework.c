@@ -452,6 +452,42 @@ int main()
 	return 0;
 }
 
+//15，如何快速找到一个单链表的中间位置
+/*设定两个指针fast和slow，慢指针走一步，快指针走两步，
+这样当快指针走到终点时，慢指针走到了中间的位置*/
+int Find_Mid(SListNode *head)
+{
+	SListNode *fast = head;
+	SListNode *slow = head;
+	while (fast&&slow&&fast->next)
+	{
+		fast = fast->next->next;
+		slow = slow->next;
+	}
+	return slow->data;
+}
+int main()
+{
+
+	SListNode *list;
+	SListInit(&list);
+	SListPushFront(&list, 1);
+	SListPushFront(&list, 8);
+	SListPushFront(&list, 3);
+	SListPushFront(&list, 4);
+	SListPushFront(&list, 4);
+	SListPushFront(&list, 6);
+	SListPushFront(&list, 5);
+	SListPushFront(&list, 8);
+	SListPrint(list);
+	printf("\n");
+	int x= Find_Mid(list);
+	printf("%d\n", x);
+	system("pause");
+	return 0;
+}
+
+
 //16,实现pow(x,y)
 /*
 函数pow(x,y)实现运算x^y，即x的y次方，这里x和y都为整数。
@@ -718,6 +754,9 @@ int main()
 	return 0;
 }
 #endif
+
+
+
 
 
 
