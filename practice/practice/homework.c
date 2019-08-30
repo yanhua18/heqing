@@ -246,6 +246,88 @@ int main()
 	return 0;
 }
 
+//7,1求数组a中前k个最小的数字
+//使用快排的划分 当然还可以使用堆进行求解
+int Partion(int *arr, int left, int right)
+{
+	int tmp = arr[left];
+	if (arr == NULL)
+	{
+		return -1;
+	}
+	while (left < right)
+	{
+		while (left < right && arr[right] >= tmp)
+		{
+			right--;
+		}
+		if (left >= right)
+		{
+			break;
+		}
+		else
+		{
+			arr[left] = arr[right];
+		}
+		while (left < right && arr[left] <= tmp)
+		{
+			left++;
+		}
+		if (left >= right)
+		{
+			break;
+		}
+		else
+		{
+			arr[right] = arr[left];
+		}
+	}
+	arr[left] = tmp;
+	return left;
+}
+void Little_K(int *arr, int len, int k)
+{
+	int par = 0;
+	int start = 0;
+	int end = len - 1;
+	int mid = len / 2;
+	int index = Partion(arr, start, end);//使用上一个题目的Partion函数
+	if (arr == NULL || len < 1)
+	{
+		return;
+	}
+	if (arr == NULL || len < 0)
+	{
+		return 0;//假设数组当中不存放数字0
+	}
+	while (index != mid)
+	{
+		if (index > mid)
+		{//说明在左边找
+			end = index - 1;
+			index = Partion(arr, start, end);
+		}
+		else
+		{
+			start = index + 1;
+			index = Partion(arr, start, end);
+		}
+	}
+	for (int i = 0; i < k; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+}
+int main()
+{
+	int arr[] = { 12, 21, 1, 4, 2, 65, 33, 5, 3 };
+	int len = sizeof(arr) / sizeof(arr[0]);
+	Little_K(arr, len, 3);
+	system("pause");
+	return 0;
+}
+
+
 //10,在字符串中找出第一个只出现一次的字符，要求时间复杂度为O（n）
 //时间复杂度为O(n^2)
 char Find_One(int *arr)
@@ -754,6 +836,63 @@ int main()
 	return 0;
 }
 #endif
+
+
+
+//7,1求数组a中前k个最小的数字****************************************************
+void swapArgs(int *a, int *b)
+{
+	int tmp = 0;
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+void dealQSort(int *arr, int start, int end)//相当于一个二叉树的前序
+{
+	if (start >= end)
+	{
+		return;
+	}
+	int flag = 1;
+	int i = start;
+	int j = end;
+	while (i<j)//当start和end交换的时候，就退出
+	{
+		if (arr[i] > arr[j])//如果前面的大于后面的就进行交换
+		{
+			swapArgs(&arr[i], &arr[j]);
+			flag = !flag;
+		}
+		if (flag)//如果交换成功，就将j前移
+		{
+			j--;
+		}
+		else//否则就i后移
+		{
+			i++;
+		}
+	}
+	dealQSort(arr, start, i - 1);//对左子树进行排序
+	dealQSort(arr, i + 1, end);//对右子树进行排序
+}
+void Little_K(int *arr, int len, int k)
+{
+	dealQSort(arr, 0, len - 1);
+	for (int i = 0; i < k; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+}
+int main()
+{
+	int arr[] = { 12, 21, 1, 4, 2, 65, 33, 5, 3 };
+	int len = sizeof(arr) / sizeof(arr[0]);
+	Little_K(arr, len, 6);
+	system("pause");
+	return 0;
+}
+
+
 
 
 
