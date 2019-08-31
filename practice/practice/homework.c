@@ -327,6 +327,115 @@ int main()
 	return 0;
 }
 
+//7,1求数组a中前k个最小的数字****************************************************
+void swapArgs(int *a, int *b)
+{
+	int tmp = 0;
+	tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+void dealQSort(int *arr, int start, int end)//相当于一个二叉树的前序
+{
+	if (start >= end)
+	{
+		return;
+	}
+	int flag = 1;
+	int i = start;
+	int j = end;
+	while (i<j)//当start和end交换的时候，就退出
+	{
+		if (arr[i] > arr[j])//如果前面的大于后面的就进行交换
+		{
+			swapArgs(&arr[i], &arr[j]);
+			flag = !flag;
+		}
+		if (flag)//否则i++
+		{
+			i++;
+		}
+		else//如果交换成功，就将j前移
+		{
+			j--;
+		}
+	}
+	dealQSort(arr, start, i - 1);//对左子树进行排序
+	dealQSort(arr, i + 1, end);//对右子树进行排序
+}
+void Little_K(int *arr, int len, int k)
+{
+	dealQSort(arr, 0, len - 1);
+	for (int i = 0; i < k; i++)
+	{
+		printf("%d ", arr[i]);
+	}
+}
+int main()
+{
+	int arr[] = { 12, 21, 1, 4, 2, 65, 33, 5, 3 };
+	int len = sizeof(arr) / sizeof(arr[0]);
+	Little_K(arr, len, 6);
+	system("pause");
+	return 0;
+}
+
+//8，求一个数组中元素出现次数超过一半的数字
+void Swap(int *a, int *b)
+{
+	int tmp = *a;
+	*a = *b;
+	*b = tmp;
+}
+void quickSort(int *arr, int start, int end)
+{
+	int i = start;
+	int j = end;
+	int flag = 1;
+	if (start >= end)
+	{
+		return;
+	}
+	while (i < j)
+	{
+		if (arr[i] > arr[j])
+		{
+			Swap(&arr[i], &arr[j]);
+			flag = !flag;
+		}
+		flag ? i++:j--;
+	}
+	quickSort(arr, start, i - 1);
+	quickSort(arr, i + 1, end);
+}
+int arrayLenHalfNum(int *arr,int len)
+{
+	int mid = len / 2;
+	int i = 0;
+	int count = 0;
+	quickSort(arr, 0, len - 1);
+	for (i = 0; i < len; i++)
+	{
+		if (arr[i] = arr[mid])
+		{
+			count++;
+		}
+	}
+	if (count > mid)
+	{
+		return arr[mid];
+	}
+}
+int main()
+{
+	int arr[] = { 1, 2, 3, 2, 2, 2, 5, 4, 2 };
+	int len = sizeof(arr) / sizeof(arr[0]);
+	int x = arrayLenHalfNum(arr,len);
+	printf("%d\n", x);
+	system("pause");
+	return 0;
+}
+
 
 //10,在字符串中找出第一个只出现一次的字符，要求时间复杂度为O（n）
 //时间复杂度为O(n^2)
@@ -818,79 +927,11 @@ int main()
 	return 0;
 }
 
-
-
-//8，求一个数组中元素出现次数超过一半的数字
-int arrayLenHalfNum(int *arr,int len)
-{
-	int mid = len / 2;
-
-}
-int main()
-{
-	int arr[] = { 1, 2, 3, 2, 2, 2, 5, 4, 2 };
-	int len = sizeof(arr) / sizeof(arr[0]);
-	int x = arrayLenHalfNum(arr,len);
-	printf("%d\n", x);
-	system("pause");
-	return 0;
-}
 #endif
 
 
 
-//7,1求数组a中前k个最小的数字****************************************************
-void swapArgs(int *a, int *b)
-{
-	int tmp = 0;
-	tmp = *a;
-	*a = *b;
-	*b = tmp;
-}
-void dealQSort(int *arr, int start, int end)//相当于一个二叉树的前序
-{
-	if (start >= end)
-	{
-		return;
-	}
-	int flag = 1;
-	int i = start;
-	int j = end;
-	while (i<j)//当start和end交换的时候，就退出
-	{
-		if (arr[i] > arr[j])//如果前面的大于后面的就进行交换
-		{
-			swapArgs(&arr[i], &arr[j]);
-			flag = !flag;
-		}
-		if (flag)//如果交换成功，就将j前移
-		{
-			j--;
-		}
-		else//否则就i后移
-		{
-			i++;
-		}
-	}
-	dealQSort(arr, start, i - 1);//对左子树进行排序
-	dealQSort(arr, i + 1, end);//对右子树进行排序
-}
-void Little_K(int *arr, int len, int k)
-{
-	dealQSort(arr, 0, len - 1);
-	for (int i = 0; i < k; i++)
-	{
-		printf("%d ", arr[i]);
-	}
-}
-int main()
-{
-	int arr[] = { 12, 21, 1, 4, 2, 65, 33, 5, 3 };
-	int len = sizeof(arr) / sizeof(arr[0]);
-	Little_K(arr, len, 6);
-	system("pause");
-	return 0;
-}
+
 
 
 
