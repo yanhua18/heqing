@@ -1,5 +1,6 @@
 #include"sort.h"
 
+#if 0
 //归并排序******************************************************************************
 void dealMergeSort(int *arr, int*tmp, int start, int end)//时间复杂度:nlogn
 {
@@ -97,6 +98,7 @@ void dealQSort(int *arr, int start, int end)//相当于一个二叉树的前序
 }
 
 
+
 //挖坑法版本########################################################################
 void dealquickSort(int *arr, int start, int end)
 {
@@ -141,6 +143,9 @@ void printArray(int*arr, int n)
 	}
 	putchar('\n');
 }
+
+
+
 //hoare法####################################################################################################
 void swapArgs(int *a, int *b)
 {
@@ -254,6 +259,9 @@ void printArray(int*arr, int n)
 	}
 	putchar('\n');
 }
+
+#endif
+
 //希尔排序****************************************************************************************************
 void ShellSort(int * arr, int n)
 {
@@ -279,3 +287,4 @@ void ShellSort(int * arr, int n)
 		}
 	}
 }
+
