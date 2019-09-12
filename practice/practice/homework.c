@@ -34,8 +34,6 @@ int main()
 
 
 
-
-#if 0
 //1，在一个二维数组中，每一行按照从左到右递增的顺序排列，每一列按照从上到下递增的顺序排列，输入一个整数判断是否存在这个二维数组中，时间复杂度（O（row+col））
 int search(int *arr[][4], int data, int *m, int *n)
 {
@@ -1095,7 +1093,7 @@ int main()
 	return 0;
 }
 
-#endif
+
 
 
 
